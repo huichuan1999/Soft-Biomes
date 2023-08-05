@@ -1,5 +1,5 @@
 let physics;
-
+let attraction;
 function setup() {
   // ...初始化physics等
   createCanvas(windowWidth, windowHeight);
