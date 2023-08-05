@@ -8,6 +8,12 @@ function setup() {
 //   physics.addBehavior(gb);
   
   physics.setWorldBounds(new Rect(0, 0, width, height));
+
+  attraction = new AttractionBehavior(new Vec2D(mouseX, mouseY), 500, 0.1);
+  physics.addBehavior(attraction);
+
+  physics.setDrag(0.01);
+
   // 创建三角形生物
   for (let i = 0; i < 50; i++) {
     let x1 = random(width);
@@ -26,10 +32,14 @@ function draw() {
   physics.update();
   background(0);
   
+  // 更新吸引行为的中心
+  attraction.setAttractor(new Vec2D(mouseX, mouseY));
+
   // 绘制每个三角形生物
   for (let tri of triangles) {
     tri.draw();
   }
+  
 }
 
 function mousePressed() {
@@ -44,7 +54,7 @@ function mousePressed() {
   triangles.push(tri);
 
   // 创建排斥行为
-  let repulsion = new AttractionBehavior(new Vec2D(mouseX, mouseY), 100, -0.01);
-  physics.addBehavior(repulsion);
+  // let repulsion = new AttractionBehavior(new Vec2D(mouseX, mouseY), 100, -0.01);
+  // physics.addBehavior(repulsion);
 }
 
